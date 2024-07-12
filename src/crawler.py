@@ -28,7 +28,7 @@ def crawl(url):
         response = requests.get(url)
         if not response.ok:
             print(f"crawl({url}): {r.status_code} {r.reason}")
-            return 
+            return
 
         html = BeautifulSoup(response.text, 'html.parser')
         links = html.find_all('a')
@@ -37,7 +37,7 @@ def crawl(url):
             if link:
                 # Create an absolute address from a (possibly) relative URL
                 absoluteURL = urljoin(url, link)
-                
+
                 # Only deal with resources accessible over HTTP or HTTPS
                 if absoluteURL.startswith('http'):
                     print(absoluteURL)
@@ -53,7 +53,7 @@ def crawl(url):
     return
 
 
-## An absolute URL is required to begin
+# An absolute URL is required to begin
 if len(sys.argv) < 2:
     print("Error: no Absolute URL supplied")
     sys.exit(1)
@@ -65,7 +65,7 @@ if parsed.scheme == '' or parsed.netloc == '':
     print("Error: Invalid URL supplied.\nPlease supply an absolute URL to this program")
     sys.exit(2)
 
-## The user may override the default recursion depth of 3
+# The user may override the default recursion depth of 3
 maxDepth = 3
 if len(sys.argv) > 2:
     maxDepth = int(sys.argv[2])
